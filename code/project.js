@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 time_end: data.time_end
             }),
         })
-        .then(response => response.json())
+        .then(response => console.log(response.json))
         .then(data => {
             alert('Reservation made successfully!');
             modal.style.display = 'none';
