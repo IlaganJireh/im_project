@@ -4,9 +4,9 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 // Database connection
 $servername = "localhost";
-$username = "your_username"; // replace with your MySQL username
-$password = "your_password"; // replace with your MySQL password
-$dbname = "your_database"; // replace with your MySQL database name
+$username = "root";
+$password = "";
+$dbname = "im_project";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 

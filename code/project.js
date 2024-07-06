@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var data = {};
         formData.forEach((value, key) => (data[key] = value));
 
-        fetch('api.php', {
+        fetch('C:\Users\Andrei Ilagan\INFOMANAGEMENT SHI\im_project\code\api.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
