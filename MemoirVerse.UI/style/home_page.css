@@ -1,0 +1,170 @@
+body {
+  background: linear-gradient(to right, #dcf2f1, white);
+  font-family: "Comic Sans MS";
+  background-color: #f4f4f9;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.features .feature {
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 10px;
+  transition: transform 0.2s;
+}
+
+.features .feature:hover {
+  transform: scale(1.05);
+}
+
+.features a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.navbar {
+  background-color: #3b5998;
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  padding: 5px 10px;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+.profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.content {
+  text-align: center;
+  padding: 30px 20px;
+  flex: 1;
+}
+
+.content h1 {
+  font-size: 2em;
+  color: #3b5998;
+  margin-bottom: 20px;
+}
+
+.content p {
+  font-size: 1em;
+  margin-bottom: 30px;
+  color: #555;
+}
+
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.feature {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 100%;
+  max-width: 300px;
+  transition: transform 0.3s;
+}
+
+.feature:hover {
+  transform: scale(1.05);
+}
+
+.feature h3 {
+  font-size: 1.2em;
+  color: #3b5998;
+  margin: 15px 0;
+}
+
+.feature .icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.footer {
+  background-color: #dcf2f1;
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid #dcf2f1;
+  font-family: "Arial", sans-serif;
+}
+
+.footer-content {
+  max-width: 95%;
+  margin: 0 auto;
+}
+
+.footer p {
+  margin: 0;
+  color: #555;
+  font-size: 0.9em;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+}
+
+.footer-links li {
+  display: inline;
+  margin-right: 10px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #007bff;
+  font-size: 0.9em;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar a {
+    padding: 5px 0;
+  }
+
+  .content h1 {
+    font-size: 1.8em;
+  }
+
+  .content p {
+    font-size: 0.9em;
+  }
+
+  .feature {
+    width: 100%;
+  }
+}

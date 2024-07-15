@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Reactions Pie Chart</title>
+    <link rel="stylesheet" href="./style/chart.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Select a date to view all of people's mood</h1>
+    <input type="date" id="date_picker" onchange="fetch_data()">
+    <div id="chart_container">
+        <canvas id="my_chart"></canvas>
+    </div>
+    <div id="mood_counts"></div>
+    <script src="./script/chart.js"></script>
+</body>
+</html>

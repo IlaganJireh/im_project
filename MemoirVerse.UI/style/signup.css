@@ -1,0 +1,193 @@
+body {
+  background: linear-gradient(to right, #DCF2F1, white); 
+  margin: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #ffffff;
+}
+
+.container {
+  display: flex;
+  background-color: #ffffff;
+  box-shadow: 25px 20px 25px rgba(0, 0, 0, 0.719);
+  border-radius: 10px;
+  overflow: hidden;
+  width: 800px;
+  padding: 0px;
+}
+
+.welcome-section {
+  background-color: #334868;
+  color: #ffffff;
+  padding: 30px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.welcome-section h1 {
+  margin: 0;
+  font-size: 2em;
+}
+
+.welcome-section p {
+  font-size: 1em;
+  margin-top: 15px;
+}
+
+.form-section {
+  padding: 30px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 250px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+input[type="email"],
+input[type="text"],
+input[type="password"],
+input[type="date"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.submit-btn {
+  padding: 12px 24px;
+  background-color: #2c3e50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+}
+
+.submit-btn::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+.submit-btn:hover::before {
+  width: 200%;
+  height: 200%;
+}
+
+.submit-btn:hover {
+  background-color: #1a232c;
+}
+
+.submit-text {
+  position: relative;
+  z-index: 1;
+}
+
+.separator {
+  margin: 20px 0;
+  font-size: 1em;
+  color: #888;
+}
+
+.create-account-btn {
+  width: 200px;
+  padding: 10px;
+  border: 2px solid #33527f;
+  border-radius: 5px;
+  font-size: 1em;
+  background-color: #ffffff;
+  color: #33527f;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.create-account-btn:hover {
+  background-color: #33527f;
+  color: #ffffff;
+}
+
+.login-link {
+  margin-top: 20px;
+  font-size: 1em;
+  color: #00796b;
+}
+
+.login-link a {
+  color: #33527f;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.login-link a:hover {
+  color: #1a3155;
+  text-decoration: underline;
+}
+
+@media only screen and (max-width: 424px) {
+  body,
+  .container {
+    flex-direction: column;
+  }
+
+  .container {
+    margin: 10px;
+  }
+
+  .welcome-section {
+    align-items: center;
+    padding: 18px;
+  }
+
+  .form-section {
+    padding: 18px;
+  }
+
+  .welcome-section h1 {
+    font-size: 24px;
+  }
+
+  .welcome-section p,
+  .form-section h2,
+  .submit-btn,
+  .create-account-btn {
+    font-size: 14px;
+  }
+
+  .submit-btn,
+  .create-account-btn {
+    width: 100%;
+    margin: 5px 0;
+  }
+}
