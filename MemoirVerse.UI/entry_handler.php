@@ -4,36 +4,31 @@ session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $entry = $_POST['entry'];
+    $mood = $_POST['mood'];
     $user_id = $_SESSION['user_id'];
     $entry_date = date('Y-m-d H:i:s');
-    $entry_image = null;
+    $entry_image = '';
 
-    if (isset($_FILES['entry_image']) && $_FILES['entry_image']['error'] == UPLOAD_ERR_OK) {
-        $fileTmpPath = $_FILES['entry_image']['tmp_name'];
-        $fileName = $_FILES['entry_image']['name'];
-        $fileSize = $_FILES['entry_image']['size'];
-        $fileType = $_FILES['entry_image']['type'];
-        $fileNameCmps = explode(".", $fileName);
-        $fileExtension = strtolower(end($fileNameCmps));
-        $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
-
-        $uploadFileDir = './uploaded_images/';
-        $dest_path = $uploadFileDir . $newFileName;
-
-        if(move_uploaded_file($fileTmpPath, $dest_path)) {
-            $entry_image = $dest_path;
-        }
+    if (!empty($_FILES['entry_image']['name'])) {
+        $target_dir = "uploads/";
+        $target_file = $target_dir . basename($_FILES["entry_image"]["name"]);
+        move_uploaded_file($_FILES["entry_image"]["tmp_name"], $target_file);
+        $entry_image = $target_file;
     }
 
     $stmt = $conn->prepare("INSERT INTO diary_entries (user_id, entry, entry_date, entry_image) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("isss", $user_id, $entry, $entry_date, $entry_image);
+    $stmt->execute();
+
+    $stmt = $conn->prepare("INSERT INTO moods (user_id, mood, entry_date) VALUES (?, ?, ?)");
+    $stmt->bind_param("iss", $user_id, $mood, $entry_date);
 
     header('Content-Type: application/json');
 
     if ($stmt->execute()) {
-        echo json_encode(['status' => 'success', 'message' => 'Diary entry saved successfully.']);
+        echo json_encode(['status' => 'success', 'message' => 'Diary and Mood entry saved successfully.']);
     } else {
-        echo json_encode(['status' => 'error', 'message' => 'Failed to save diary entry.']);
+        echo json_encode(['status' => 'error', 'message' => 'Failed to save entries.']);
     }
 
     exit();
@@ -41,19 +36,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $user_id = $_SESSION['user_id'];
+    $type = $_GET['type'];
     $sortOrder = $_GET['sort'] == 'oldest' ? 'ASC' : 'DESC';
 
-    $stmt = $conn->prepare("SELECT * FROM diary_entries WHERE user_id = ? ORDER BY entry_date $sortOrder");
-    $stmt->bind_param("i", $user_id);
+    if ($type == 'diary') {
+        $stmt = $conn->prepare("SELECT * FROM diary_entries WHERE user_id = ? ORDER BY entry_date $sortOrder");
+        $stmt->bind_param("i", $user_id);
+    } else {
+        $stmt = $conn->prepare("SELECT * FROM moods WHERE user_id = ? ORDER BY entry_date $sortOrder");
+        $stmt->bind_param("i", $user_id);
+    }
+
     $stmt->execute();
     $result = $stmt->get_result();
-    $diary_entries = [];
+    $entries = [];
     while ($row = $result->fetch_assoc()) {
-        $diary_entries[] = $row;
+        $entries[] = $row;
     }
 
     header('Content-Type: application/json');
-    echo json_encode($diary_entries);
+    echo json_encode($entries);
     exit();
 }
 
