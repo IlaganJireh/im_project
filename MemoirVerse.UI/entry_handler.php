@@ -7,17 +7,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mood = $_POST['mood'];
     $user_id = $_SESSION['user_id'];
     $entry_date = date('Y-m-d H:i:s');
-    $entry_image = '';
 
-    if (!empty($_FILES['entry_image']['name'])) {
-        $target_dir = "uploads/";
-        $target_file = $target_dir . basename($_FILES["entry_image"]["name"]);
-        move_uploaded_file($_FILES["entry_image"]["tmp_name"], $target_file);
-        $entry_image = $target_file;
-    }
-
-    $stmt = $conn->prepare("INSERT INTO diary_entries (user_id, entry, entry_date, entry_image) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("isss", $user_id, $entry, $entry_date, $entry_image);
+    $stmt = $conn->prepare("INSERT INTO diary_entries (user_id, entry, entry_date) VALUES (?, ?, ?)");
+    $stmt->bind_param("iss", $user_id, $entry, $entry_date);
     $stmt->execute();
 
     $stmt = $conn->prepare("INSERT INTO moods (user_id, mood, entry_date) VALUES (?, ?, ?)");
@@ -26,9 +18,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header('Content-Type: application/json');
 
     if ($stmt->execute()) {
-        echo json_encode(['status' => 'success', 'message' => 'Diary and Mood entry saved successfully.']);
+        echo json_encode(['status' => 'success', 'message' => 'Entry and Mood saved successfully.']);
     } else {
-        echo json_encode(['status' => 'error', 'message' => 'Failed to save entries.']);
+        echo json_encode(['status' => 'error', 'message' => 'Failed to save entry or mood.']);
     }
 
     exit();
@@ -36,17 +28,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $user_id = $_SESSION['user_id'];
-    $type = $_GET['type'];
     $sortOrder = $_GET['sort'] == 'oldest' ? 'ASC' : 'DESC';
+    $type = $_GET['type'];
 
     if ($type == 'diary') {
         $stmt = $conn->prepare("SELECT * FROM diary_entries WHERE user_id = ? ORDER BY entry_date $sortOrder");
-        $stmt->bind_param("i", $user_id);
     } else {
         $stmt = $conn->prepare("SELECT * FROM moods WHERE user_id = ? ORDER BY entry_date $sortOrder");
-        $stmt->bind_param("i", $user_id);
     }
 
+    $stmt->bind_param("i", $user_id);
     $stmt->execute();
     $result = $stmt->get_result();
     $entries = [];

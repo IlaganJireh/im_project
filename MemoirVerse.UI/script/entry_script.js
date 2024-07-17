@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const data = await response.json();
             if (data.status === 'success') {
                 loadEntries();
+                loadMoodEntries();
                 entryInput.value = '';
                 entryImage.value = '';
                 alert(data.message);

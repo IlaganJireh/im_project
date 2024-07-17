@@ -33,22 +33,10 @@ if (!isset($_SESSION['user_id'])) {
             <div class="logout-logo">
                 <a href="logout.php" class="logout-button">Log Out</a>
             </div>
-            <img src="./assets/memoir-logo.png" alt="Logo" class="logo">
+            <img src="./pictures/logo.png" alt="Logo" class="logo">
         </nav>
     </header>
     <main>
-        <section class="diary-section">
-            <h2>My Diary</h2>
-            <form id="entry_form" class="diary-entry" enctype="multipart/form-data">
-                <textarea id="entry_input" name="entry" placeholder="Start Writing Your Thoughts"></textarea>
-                <input type="file" id="entry_image" name="entry_image" accept="image/*">
-            </form>
-            <div class="sort-buttons">
-                <button id="sort_newest" class="diary-button">Sort by Newest</button>
-                <button id="sort_oldest" class="diary-button">Sort by Oldest</button>
-            </div>
-            <div id="entries_container"></div>
-        </section>
         <section class="mood-tracker">
             <h2>How are you feeling today?</h2>
             <div class="mood-icons">
@@ -59,8 +47,21 @@ if (!isset($_SESSION['user_id'])) {
                 <a href="#" class="mood-icon" data-mood="angry"><img src="path_to_angry_icon" alt="Angry"></a>
             </div>
             <p class="motivational-quote">Select a mood to see a motivational quote.</p>
-            <button id="submitCombinedButton" class="diary-button">Submit</button>
             <div id="mood_entries"></div>
+        </section>
+
+        <section class="diary-section">
+            <h2>What's on your mind?</h2>
+            <form id="entry_form" class="diary-entry">
+                <textarea id="entry_input" name="entry" placeholder="Start Writing Your Thoughts"></textarea>
+                <input type="file" id="entry_image" name="entry_image" accept="image/*">
+                <button type="button" id="submitCombinedButton" class="diary-button">Submit</button>
+            </form>
+            <div class="sort-buttons">
+                <button id="sort_newest" class="diary-button">Sort by Newest</button>
+                <button id="sort_oldest" class="diary-button">Sort by Oldest</button>
+            </div>
+            <div id="entries_container"></div>
         </section>
     </main>
     <script src="./script/entry_script.js"></script>
